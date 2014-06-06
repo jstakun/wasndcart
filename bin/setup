@@ -4,4 +4,8 @@ mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
 #TODO create profile
 
+client_result "WAS ND profile cartridge setup started..."
+
 /opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -create -profilePath ${OPENSHIFT_WASND_DIR}/profiles/profile1
+
+client_result "WAS ND profile cartridge finished"
