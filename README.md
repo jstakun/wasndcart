@@ -1,2 +1,1 @@
-wasndcart
-=========
+Websphere ND profile cartridge
