@@ -8,7 +8,7 @@ License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
 Vendor: IBM
 Cartridge-Version: '0.0.1'
-Cartridge-Vendor: redhat.pl
+Cartridge-Vendor: gms-world
 Categories:
   - web_framework
   - java
