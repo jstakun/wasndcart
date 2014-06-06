@@ -1,0 +1,242 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}/profiles/profile1
+WASND_SERVER_NAME=server1
+WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
+WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/server1/server1.pid
+WASND_DEPLOYMENTS_DIR=${OPENSHIFT_WASND_DIR}/monitoredDeployableApps
+
+cartridge_type="wasnd"
+
+# WAS ND TODO Verify that the deployment scanner has finished running
+function waitondeployments() {
+    if ! ismgmtup; then
+      client_message "Timed out waiting for management listening port"
+      client_message "Could not connect to WAS ND management interface, skipping deployment verification"
+    else 
+      client_message "Deployment scanner disabled, skipping deployment verification"
+    fi
+}
+
+# WAS ND check if the was nd process is running
+function isrunning() {
+
+    # Check for running app
+    if [ -f "$WASND_PID_FILE" ]; then
+      wfpid=$(cat $WASND_PID_FILE);
+      if /bin/ps --pid $wfpid 1>&2 >/dev/null;
+      then
+        return 0
+      fi
+    fi
+
+    return 1
+}
+
+# WAS ND Check if the server http port is up
+function ishttpup() {
+    let count=0
+    while [ ${count} -lt 64 ]
+    do
+        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} listening port"
+            return 0
+        fi
+        let count=${count}+1
+
+        sleep 2
+    done
+
+    return 1
+}
+
+# WAS ND Check if the server mgmt port is up
+function ismgmtup() {
+    let count=0
+    while [ ${count} -lt 64 ]
+    do
+        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} listening port"
+            return 0
+        fi
+        let count=${count}+1
+
+        sleep 2
+    done
+
+    return 1
+}
+
+# TODO build
+function build() {
+  max_memory_bytes=$(oo-cgroup-read memory.limit_in_bytes)
+  max_memory_mb=$(expr $max_memory_bytes / 1048576)
+
+  # If hot deploy is enabled, we need to restrict the Maven memory size to fit
+  # alongside the running application server. For now, just hard-code it to 64
+  # and figure out how to apply a scaling factor later.
+  if marker_present hot_deploy
+    then
+      echo "Scaling down Maven heap settings due to presence of hot_deploy marker"
+
+      if [ -z "$MAVEN_JVM_HEAP_RATIO" ]
+        then
+        MAVEN_JVM_HEAP_RATIO=0.25
+    fi
+  else
+    if [ -z "$MAVEN_JVM_HEAP_RATIO" ]
+        then
+      MAVEN_JVM_HEAP_RATIO=0.75
+    fi
+  fi
+
+  max_heap=$( echo "$max_memory_mb * $MAVEN_JVM_HEAP_RATIO" | bc | awk '{print int($1+0.5)}')
+
+  OPENSHIFT_MAVEN_XMX="-Xmx${max_heap}m"
+
+  if [ -z "$BUILD_NUMBER" ]
+  then
+      if marker_present force_clean_build
+      then
+          echo ".openshift/markers/force_clean_build found!  Removing Maven dependencies." 1>&2
+          rm -rf ${OPENSHIFT_HOMEDIR}.m2/* ${OPENSHIFT_HOMEDIR}.m2/.[^.]*
+      fi
+
+      if [ -f ${OPENSHIFT_REPO_DIR}pom.xml ] && ! marker_present skip_maven_build
+      then
+          export MAVEN_OPTS="$OPENSHIFT_MAVEN_XMX"
+          export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
+          pushd ${OPENSHIFT_REPO_DIR} > /dev/null
+
+          if [ -z "$MAVEN_OPTS" ]; then
+            export MAVEN_OPTS="$OPENSHIFT_MAVEN_XMX"
+          fi
+
+          if [ -z "$MAVEN_ARGS" ]; then
+          export MAVEN_ARGS="clean package -Popenshift -DskipTests"
+          fi
+
+          echo "Found pom.xml... attempting to build with 'mvn -e ${MAVEN_ARGS}'"
+
+          mvn --version
+          mvn $MAVEN_ARGS
+          
+          popd > /dev/null
+      fi
+  fi
+
+}
+
+# WAS ND
+function deploy() {
+  echo "Deploying WAS ND"
+
+  # if repo/deployments has any files in it, sync them to $WASND_DEPLOYMENTS_DIR
+  # and delete any files in $WASND_DEPLOYMENTS_DIR that don't exist in
+  # repo/deployments
+  if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments)" ]; then
+    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $WASND_DEPLOYMENTS_DIR
+  fi
+}
+
+# WAS ND
+function start() {
+  echo "Starting $cartridge_type cart"
+
+  # Check for running app
+  if isrunning; then
+      echo "Application is already running"
+  else    
+    
+    ${WASND_PROFILE_DIR}/bin/startServer.sh ${WASND_SERVER_NAME} > $OPENSHIFT_PROFILE_DIR/logs/${WASND_SERVER_NAME}/startup.log 2>&1 &
+ 
+    if ! ishttpup; then
+        echo "Timed out waiting for http listening port"
+        exit 1
+    fi
+
+    waitondeployments
+  fi
+}
+
+# WAS ND
+function stop() {
+  echo "Stopping $cartridge_type cart"
+
+  if isrunning; then
+    if [ -f "$WASND_PID_FILE" ]; then
+      ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} > $OPENSHIFT_PROFILE_DIR/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
+    else
+      echo "Failed to locate WAS ND PID File" 1>&2
+    fi
+  fi
+}
+
+# WAS ND 
+function restart() {
+    echo "Restarting $cartridge_type cart"
+
+    stop
+
+    start
+}
+
+# WAS ND 
+function status() {
+   if isrunning
+   then
+      client_result "Application is running"
+   else
+      client_result "Application is either stopped or inaccessible"
+   fi
+}
+
+# WAS ND 
+function reload() {
+    echo "Reloading $cartridge_type cart"
+    restart
+}
+
+# WAS ND Clean up any log files
+function tidy() {
+  client_message "Emptying log dir: $OPENSHIFT_WASND_LOG_DIR"
+  shopt -s dotglob
+  rm -rf $OPENSHIFT_WASND_LOG_DIR/*
+}
+
+
+# WAS ND Thread dump
+function threaddump() {
+  echo "Thread dump for $cartridge_type cart"
+
+  <<COMMENT 
+    if ! isrunning; then
+        echo "Application is stopped"
+        exit 1
+    elif [ -f "$WASND_PID_FILE" ]; then
+        pid=$(cat $WASND_PID_FILE);
+        java_pid=$(ps h --ppid $pid -o '%p')
+        kill -3 $java_pid
+        client_result "Success"
+        client_result ""
+        client_result "The thread dump file will be available via: rhc tail $OPENSHIFT_APP_NAME -f ${OPENSHIFT_TMP_DIR}${cartridge_type}.log -o '-n 250'"
+    else 
+        echo "Failed to locate WAS ND PID File"
+    fi
+  COMMENT  
+}
+
+case "$1" in
+  build)           build ;;
+  deploy)          deploy ;;
+  start)           start ;;
+  stop)            stop ;;
+  restart)         restart ;;
+  status)          status ;;
+  reload)          reload ;;
+  tidy)            tidy ;;
+  threaddump)      threaddump ;;
+  *)               exit 0
+esac

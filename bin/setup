@@ -1,0 +1,7 @@
+#!/bin/bash -eu
+
+mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
+
+#TODO create profile
+
+/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -create -profilePath ${OPENSHIFT_WASND_DIR}/profile1
