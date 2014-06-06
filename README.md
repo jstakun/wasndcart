@@ -1,1 +1,1 @@
-Websphere ND profile cartridge
+Websphere ND profiles cartridge
