@@ -165,13 +165,15 @@ function start() {
 function stop() {
   echo "Stopping $cartridge_type cart"
 
-  if isrunning; then
-    if [ -f "$WASND_PID_FILE" ]; then
-      ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} > ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
-    else
-      echo "Failed to locate WAS ND PID File" 1>&2
-    fi
-  fi
+  #if isrunning; then
+  #  if [ -f "$WASND_PID_FILE" ]; then
+  #    ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} > ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
+  #  else
+  #    echo "Failed to locate WAS ND PID File" 1>&2
+  #  fi
+  #fi
+  
+  echo "Cart $cartridge_type stopped"
 }
 
 # WAS ND 
