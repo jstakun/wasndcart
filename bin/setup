@@ -1,3 +1,7 @@
 #!/bin/bash -eu
 
-mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
+echo WAS ND profile cartridge setup started...
+
+#mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
+
+echo WAS ND profile cartridge setup finished
