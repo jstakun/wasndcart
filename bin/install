@@ -4,7 +4,7 @@
 
 echo WAS ND profile cartridge install started...
 
-/opt/IBM/WebSphere/AppServer/bin/manageprofiles.sh -create -profilePath ${OPENSHIFT_WASND_DIR}/profiles/profile1
+#
 
 echo WAS ND profile cartridge install finished
 

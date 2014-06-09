@@ -2,7 +2,7 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}/profiles/profile1
+WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/profile1
 WASND_SERVER_NAME=server1
 WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
 WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/server1/server1.pid
@@ -24,8 +24,8 @@ function waitondeployments() {
 function isrunning() {
 
     # Check for running app
-    if [ -f "$WASND_PID_FILE" ]; then
-      wfpid=$(cat $WASND_PID_FILE);
+    if [ -f "${WASND_PID_FILE}" ]; then
+      wfpid=$(cat ${WASND_PID_FILE});
       if /bin/ps --pid $wfpid 1>&2 >/dev/null;
       then
         return 0
@@ -167,7 +167,7 @@ function stop() {
 
   if isrunning; then
     if [ -f "$WASND_PID_FILE" ]; then
-      ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} > $OPENSHIFT_PROFILE_DIR/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
+      ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} > ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
     else
       echo "Failed to locate WAS ND PID File" 1>&2
     fi
