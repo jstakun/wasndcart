@@ -189,12 +189,13 @@ function restart() {
 
 # WAS ND 
 function status() {
-   if isrunning
-   then
-      client_result "Application is running"
-   else
-      client_result "Application is either stopped or inaccessible"
-   fi
+   #if isrunning
+   #then
+   #   client_result "Application is running"
+   #else
+   #   client_result "Application is either stopped or inaccessible"
+   #fi
+   return 0
 }
 
 # WAS ND 
