@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 
 WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
+WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
@@ -10,8 +11,8 @@ echo Calling mkdir ${OPENSHIFT_WASND_DIR}profiles
 
 mkdir ${OPENSHIFT_WASND_DIR}profiles
 
-echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -profilePath ${OPENSHIFT_WASND_DIR}profiles/profile1
+echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 
-${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -profilePath ${OPENSHIFT_WASND_DIR}profiles/profile1
+${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 
 echo WAS ND profile cartridge setup finished
