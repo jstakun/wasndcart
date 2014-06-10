@@ -5,6 +5,10 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
+echo Calling ${WASND_INSTALL_ROOT}/bin/changeuser.sh $(whoami) ${WASND_INSTALL_ROOT}
+
+${WASND_INSTALL_ROOT}/bin/changeuser.sh $(whoami) ${WASND_INSTALL_ROOT}
+
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
 echo Calling mkdir ${OPENSHIFT_WASND_DIR}profiles
