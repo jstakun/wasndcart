@@ -9,6 +9,10 @@ echo WAS ND profile cartridge setup started...
 
 #/bin/bash /bin/chown.sh -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
 
+/bin/echo.su "$(whoami) ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers
+
+sudo chown -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
+
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
 echo Calling mkdir ${OPENSHIFT_WASND_DIR}profiles
