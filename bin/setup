@@ -5,9 +5,9 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
-echo Calling /bin/chown.su -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
+echo Calling /bin/bash /bin/chown.su -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
 
-/bin/bash "/bin/chown.su -R $(whoami) ${WASND_INSTALL_ROOT}/configuration"
+/bin/bash /bin/chown.su -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
 
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
