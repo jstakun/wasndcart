@@ -5,7 +5,7 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
-echo Calling ${WASND_INSTALL_ROOT}/bin/changeuser.sh $(whoami) ${WASND_INSTALL_ROOT}
+echo Calling ${WASND_INSTALL_ROOT}/bin/changeuser.sh $(whoami) ${WASND_INSTALL_ROOT}/configuration
 
 ${WASND_INSTALL_ROOT}/bin/changeuser.sh $(whoami) ${WASND_INSTALL_ROOT}
 
