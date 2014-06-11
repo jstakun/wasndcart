@@ -9,21 +9,17 @@ echo 'Calling /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc
 
 /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp
 
-cat /tmp/newgroup.tmp
+echo '/bin/cat.su /tmp/newgroup.tmp > /etc/group'
 
-echo /bin/cat.su /tmp/newgroup.tmp > /etc/group
+/bin/cat.su /tmp/newgroup.tmp > /etc/group
 
-ping -c 1 192.168.122.65
+echo 'Calling /bin/sed.su "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow > /tmp/newgshadow.tmp'
 
-#/bin/cat.su /tmp/newgroup.tmp > /etc/group
+/bin/sed.su "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow > /tmp/newgshadow.tmp
 
-#echo Calling /bin/sed.su "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow > /tmp/newgshadow.tmp
+echo '/bin/cat.su /tmp/newgshadow.tmp > /etc/gshadow'
 
-#/bin/sed.su "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow > /tmp/newgshadow.tmp
-
-#echo /bin/cat.su /tmp/newgshadow.tmp > /etc/gshadow
-
-#/bin/cat.su /tmp/newgshadow.tmp > /etc/gshadow
+/bin/cat.su /tmp/newgshadow.tmp > /etc/gshadow
 
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
