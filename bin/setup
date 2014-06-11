@@ -5,7 +5,7 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
-echo Calling /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp
+echo 'Calling /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp'
 
 /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp
 
