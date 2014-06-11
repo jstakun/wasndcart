@@ -23,7 +23,7 @@ function waitondeployments() {
 # WAS ND check if the was nd process is running
 function isrunning() {
 
-    # Check for running app
+    echo Checkig if WAS ND is running
     if [ -f "$WASND_PID_FILE" ]; then
       wfpid=$(cat ${WASND_PID_FILE});
       if /bin/ps --pid $wfpid 1>&2 >/dev/null;
@@ -173,6 +173,8 @@ function stop() {
     else
       echo "Failed to locate WAS ND PID File" 1>&2
     fi
+  else
+     echo "Cart is not running" 
   fi
   
   echo "Cart $cartridge_type stopped"
