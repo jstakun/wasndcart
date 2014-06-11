@@ -5,26 +5,6 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
-#echo 'Calling /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp'
-
-#/bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp
-
-#echo '/bin/cat.su /tmp/newgroup.tmp > /etc/group'
-
-#/bin/cat.su /tmp/newgroup.tmp > /etc/group
-
-#echo 'Calling /bin/sed.su "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow > /tmp/newgshadow.tmp'
-
-#/bin/sed.su "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow > /tmp/newgshadow.tmp
-
-#echo '/bin/cat.su /tmp/newgshadow.tmp > /etc/gshadow'
-
-#/bin/cat.su /tmp/newgshadow.tmp > /etc/gshadow
-
-echo Calling /bin/chown.su -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
-
-/bin/chown.su -R $(whoami) ${WASND_INSTALL_ROOT}/configuration
-
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
 echo Calling mkdir ${OPENSHIFT_WASND_DIR}profiles
