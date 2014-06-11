@@ -8,3 +8,4 @@ echo WAS ND profile cartridge install started...
 
 echo WAS ND profile cartridge install finished
 
+exit 0

@@ -19,4 +19,6 @@ echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profile
 
 ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 
-echo WAS ND profile cartridge setup finished
+echo WAS ND profile cartridge setup finished with status $?
+
+exit 0
