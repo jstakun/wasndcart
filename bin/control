@@ -178,6 +178,7 @@ function stop() {
   fi
   
   echo "Cart $cartridge_type stopped"
+  exit 0
 }
 
 # WAS ND 
