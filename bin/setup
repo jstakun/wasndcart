@@ -9,7 +9,11 @@ echo 'Calling /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc
 
 /bin/sed.su "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group > /tmp/newgroup.tmp
 
-#echo /bin/cat.su /tmp/newgroup.tmp > /etc/group
+cat /tmp/newgroup.tmp
+
+echo /bin/cat.su /tmp/newgroup.tmp > /etc/group
+
+ping -c 1 192.168.122.65
 
 #/bin/cat.su /tmp/newgroup.tmp > /etc/group
 
