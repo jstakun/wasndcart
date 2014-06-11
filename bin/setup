@@ -5,7 +5,7 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
-echo Checkick user id
+echo Checking user id:
 
 id
 
@@ -17,8 +17,6 @@ mkdir ${OPENSHIFT_WASND_DIR}profiles
 
 echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 
-#${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
-
-${WASND_INSTALL_ROOT}/bin/manageprofiles.sh
+${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 
 echo WAS ND profile cartridge setup finished
