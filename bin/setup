@@ -5,9 +5,13 @@ WASND_PROFILE_NAME=profile1
 
 echo WAS ND profile cartridge setup started...
 
-echo Calling /bin/usermod.su "-a -G profilers $(whoami)"
+echo Calling /bin/sed.su -i "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group
 
-/bin/usermod.su -a -G profilers $(whoami)
+/bin/sed.su -i "s/^profilers.*/profilers:x:1005:demo,$(whoami)/" /etc/group
+
+echo Calling /bin/sed.su -i "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow
+
+/bin/sed.su -i "s/^profilers.*/profilers:::demo,$(whoami)/" /etc/gshadow
 
 mkdir -p ${OPENSHIFT_HOMEDIR}/.m2
 
