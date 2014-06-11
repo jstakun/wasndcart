@@ -1,0 +1,12 @@
+---
+locked_files:
+- bin/
+- bin/*
+- metadata/
+- metadata/*
+- hooks/
+- hooks/*
+- env/
+- env/OPENSHIFT_WASND_DIR
+- env/OPENSHIFT_WASND_LOG_DIR
+- env/M2_HOME
