@@ -2,7 +2,8 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/profile1
+WASND_PROFILE_NAME=profile1
+WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 WASND_SERVER_NAME=server1
 WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
 WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/server1/server1.pid
@@ -150,7 +151,8 @@ function start() {
       echo "Application is already running"
   else    
     
-     ${WASND_PROFILE_DIR}/bin/startServer.sh ${WASND_SERVER_NAME} > ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/startup.log 2>&1 &
+     ${WASND_PROFILE_DIR}/bin/startServer.sh ${WASND_SERVER_NAME} 
+     #> ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/startup.log 2>&1 &
  
      if ! ishttpup; then
         echo "Timed out waiting for http listening port"
@@ -169,7 +171,8 @@ function stop() {
 
   if isrunning; then
     if [ -f "$WASND_PID_FILE" ]; then
-      ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} > ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
+      ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} 
+      #> ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
     else
       echo "Failed to locate WAS ND PID File" 1>&2
     fi
