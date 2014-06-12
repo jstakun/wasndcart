@@ -36,6 +36,7 @@ function ishttpup() {
             return 0
         fi
         let count=${count}+1
+        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} but keep trying: $count"
         
         sleep 2
     done
@@ -53,6 +54,7 @@ function ismgmtup() {
             return 0
         fi
         let count=${count}+1
+        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} but keep trying: $count"
 
         sleep 2
     done
