@@ -31,14 +31,12 @@ function ishttpup() {
     let count=0
     while [ ${count} -lt 64 ]
     do
-        #if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
         if /usr/sbin/lsof -P -n -i | grep "*:${OPENSHIFT_WASND_HTTP_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} listening port"
             return 0
         fi
         let count=${count}+1
-        echo "Failed to connect with ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} but keep trying: ${count}..."
-
+        
         sleep 2
     done
 
@@ -50,7 +48,6 @@ function ismgmtup() {
     let count=0
     while [ ${count} -lt 64 ]
     do
-        #if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
         if /usr/sbin/lsof -P -n -i | grep "*:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} listening port"
             return 0
@@ -224,23 +221,15 @@ function threaddump() {
   fi 
 }
 
-#case "$1" in
-#  build)           build ;;
-#  deploy)          deploy ;;
-#  start)           start ;;
-#  stop)            stop ;;
-#  restart)         restart ;;
-#  status)          status ;;
-#  reload)          reload ;;
-#  tidy)            tidy ;;
-#  threaddump)      threaddump ;;
-#  *)               exit 0
-#esac
-
 case "$1" in
-   start)           start ;;
-   stop)            stop ;;
-   restart)         restart ;;
-   status)          status ;;
-   *)               exit 0;
-esac    
+  build)           build ;;
+  deploy)          deploy ;;
+  start)           start ;;
+  stop)            stop ;;
+  restart)         restart ;;
+  status)          status ;;
+  reload)          reload ;;
+  tidy)            tidy ;;
+  threaddump)      threaddump ;;
+  *)               exit 0;
+esac   
