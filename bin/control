@@ -122,7 +122,7 @@ function build() {
 
 # WAS ND
 function deploy() {
-  echo "Deploying WAS ND to ${WASND_DEPLOYMENTS_DIR}"
+  echo "Deploying WAS ND app to ${WASND_DEPLOYMENTS_DIR}"
   if [ "$(ls ${OPENSHIFT_REPO_DIR}deployments)" ]; then
     rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}deployments/ ${WASND_DEPLOYMENTS_DIR}
   fi
