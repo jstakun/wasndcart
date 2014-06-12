@@ -11,20 +11,10 @@ WASND_DEPLOYMENTS_DIR=${OPENSHIFT_WASND_DIR}/monitoredDeployableApps
 
 cartridge_type="wasnd"
 
-# WAS ND TODO Verify that the deployment scanner has finished running
-function waitondeployments() {
-    if ! ismgmtup; then
-      client_message "Timed out waiting for management listening port"
-      client_message "Could not connect to WAS ND management interface, skipping deployment verification"
-    else 
-      client_message "Deployment scanner disabled, skipping deployment verification"
-    fi
-}
-
 # WAS ND check if the was nd process is running
 function isrunning() {
 
-    echo Checkig if WAS ND is running
+    echo Checking if WAS ND is running
     if [ -f "$WASND_PID_FILE" ]; then
       wfpid=$(cat ${WASND_PID_FILE});
       if /bin/ps --pid $wfpid 1>&2 >/dev/null;
@@ -160,8 +150,6 @@ function start() {
         echo "Timed out waiting for http listening port"
         exit 1
      fi
-
-     waitondeployments
   fi
   
   echo "Cartridge $cartridge_type started"
@@ -182,7 +170,6 @@ function stop() {
   fi
   
   echo "Cart $cartridge_type stopped"
-  exit 0
 }
 
 # WAS ND 
