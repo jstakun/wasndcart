@@ -2,12 +2,14 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-WASND_PROFILE_NAME=profile1
-WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
+WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
 WASND_SERVER_NAME=server1
+WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
-WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/server1/server1.pid
-WASND_DEPLOYMENTS_DIR=${OPENSHIFT_WASND_DIR}/monitoredDeployableApps
+WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/server1.pid
+WASND_DEPLOYMENTS_DIR=${WASND_PROFILE_DIR}/monitoredDeployableApps/servers/${WASND_SERVER_NAME}
+
+/monitoredDeployableApps/servers/server1
 
 cartridge_type="wasnd"
 
@@ -122,13 +124,9 @@ function build() {
 
 # WAS ND
 function deploy() {
-  echo "Deploying WAS ND"
-
-  # if repo/deployments has any files in it, sync them to $WASND_DEPLOYMENTS_DIR
-  # and delete any files in $WASND_DEPLOYMENTS_DIR that don't exist in
-  # repo/deployments
-  if [ "$(ls ${OPENSHIFT_REPO_DIR}/deployments)" ]; then
-    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}/deployments/ $WASND_DEPLOYMENTS_DIR
+  echo "Deploying WAS ND to ${WASND_DEPLOYMENTS_DIR}"
+  if [ "$(ls ${OPENSHIFT_REPO_DIR}deployments)" ]; then
+    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}deployments/ ${WASND_DEPLOYMENTS_DIR}
   fi
 }
 
