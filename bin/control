@@ -41,7 +41,8 @@ function ishttpup() {
     let count=0
     while [ ${count} -lt 64 ]
     do
-        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+        #if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+        if /usr/sbin/lsof -P -n -i | grep "*:${OPENSHIFT_WASND_HTTP_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} listening port"
             return 0
         fi
@@ -59,7 +60,8 @@ function ismgmtup() {
     let count=0
     while [ ${count} -lt 64 ]
     do
-        if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+        #if /usr/sbin/lsof -P -n -i "@${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT}" | grep "(LISTEN)" > /dev/null; then
+        if /usr/sbin/lsof -P -n -i | grep "*:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} listening port"
             return 0
         fi
