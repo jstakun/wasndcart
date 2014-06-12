@@ -46,6 +46,7 @@ function ishttpup() {
             return 0
         fi
         let count=${count}+1
+        echo "Failed to connect with ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} but keep trying: ${count}..."
 
         sleep 2
     done
@@ -152,8 +153,7 @@ function start() {
   else    
     
      ${WASND_PROFILE_DIR}/bin/startServer.sh ${WASND_SERVER_NAME} 
-     #> ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/startup.log 2>&1 &
- 
+     
      if ! ishttpup; then
         echo "Timed out waiting for http listening port"
         exit 1
@@ -172,7 +172,6 @@ function stop() {
   if isrunning; then
     if [ -f "$WASND_PID_FILE" ]; then
       ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} 
-      #> ${OPENSHIFT_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/stop.log 2>&1 &
     else
       echo "Failed to locate WAS ND PID File" 1>&2
     fi
