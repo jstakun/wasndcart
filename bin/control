@@ -9,8 +9,6 @@ WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
 WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/server1.pid
 WASND_DEPLOYMENTS_DIR=${WASND_PROFILE_DIR}/monitoredDeployableApps/servers/${WASND_SERVER_NAME}
 
-/monitoredDeployableApps/servers/server1
-
 cartridge_type="wasnd"
 
 # WAS ND check if the was nd process is running
