@@ -15,8 +15,8 @@ echo Calling mkdir ${OPENSHIFT_WASND_DIR}profiles
 
 mkdir ${OPENSHIFT_WASND_DIR}profiles
 
-echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME} -hostName ${OPENSHIFT_APP_DNS}
+echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME} -hostName ${OPENSHIFT_WASND_IP}
 
-${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME} -hostName ${OPENSHIFT_APP_DNS}
+${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME} -hostName ${OPENSHIFT_WASND_IP}
 
 echo WAS ND profile cartridge setup finished with status $?
