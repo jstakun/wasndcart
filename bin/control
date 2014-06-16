@@ -65,7 +65,7 @@ function ismgmtup() {
 # TODO build
 function build() {
  
-  OPENSHIFT_MAVEN_MIRROR="${WASND_BIN_DIR}/settings.xml"
+  OPENSHIFT_MAVEN_MIRROR="${OPENSHIFT_WASND_DIR}bin/settings.xml"
 
   max_memory_bytes=$(oo-cgroup-read memory.limit_in_bytes)
   max_memory_mb=$(expr $max_memory_bytes / 1048576)
