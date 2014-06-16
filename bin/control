@@ -64,6 +64,9 @@ function ismgmtup() {
 
 # TODO build
 function build() {
+ 
+  OPENSHIFT_MAVEN_MIRROR="${WASND_BIN_DIR}/settings.xml"
+
   max_memory_bytes=$(oo-cgroup-read memory.limit_in_bytes)
   max_memory_mb=$(expr $max_memory_bytes / 1048576)
 
@@ -113,8 +116,14 @@ function build() {
 
           echo "Found pom.xml... attempting to build with 'mvn -e ${MAVEN_ARGS}'"
 
-          mvn --version
-          mvn $MAVEN_ARGS
+          if [ -n "$OPENSHIFT_MAVEN_MIRROR" ]
+          then
+              mvn --global-settings $OPENSHIFT_MAVEN_MIRROR --version
+              mvn --global-settings $OPENSHIFT_MAVEN_MIRROR $MAVEN_ARGS
+          else
+              mvn --version
+              mvn $MAVEN_ARGS
+          fi
           
           popd > /dev/null
       fi
