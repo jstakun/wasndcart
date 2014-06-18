@@ -18,12 +18,12 @@ appsBefore = AdminApp.list().split("\n");
 for iApp in appsBefore:   
     if str(iApp).find(strAppToInstall) >= 0:   
             appToUninstall = iApp;
-    if appToUninstall:
-        print "Uninstalling app: ", appToUninstall
-        appToUninstall = str(appToUninstall).strip();
-        AdminApp.uninstall(appToUninstall);
-        AdminConfig.save();
-        break;
+
+if appToUninstall:
+    print "Uninstalling app: ", appToUninstall
+    appToUninstall = str(appToUninstall).strip();
+    AdminApp.uninstall(appToUninstall);
+    AdminConfig.save();
      
 #Install the app
 print "Installing App: ", strAppToInstall
