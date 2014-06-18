@@ -19,10 +19,12 @@ function isrunning() {
       wfpid=$(cat ${WASND_PID_FILE});
       if /bin/ps --pid $wfpid 1>&2 >/dev/null;
       then
+        echo WAS ND is running
         return 0
       fi
     fi
-
+    
+    echo WAS ND is not running
     return 1
 }
 
