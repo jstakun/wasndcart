@@ -7,7 +7,7 @@ WASND_SERVER_NAME=server1
 WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
 WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/server1.pid
-WASND_DEPLOYMENTS_DIR=${WASND_PROFILE_DIR}/monitoredDeployableApps/servers/${WASND_SERVER_NAME}
+#WASND_DEPLOYMENTS_DIR=${WASND_PROFILE_DIR}/monitoredDeployableApps/servers/${WASND_SERVER_NAME}
 
 cartridge_type="wasnd"
 
@@ -134,12 +134,12 @@ function build() {
 }
 
 #WAS ND
-#function deploy() {
-#  echo "Deploying WAS ND app to ${WASND_DEPLOYMENTS_DIR}"
+function deploy() {
+  echo "Deploying WAS ND app to ${WASND_DEPLOYMENTS_DIR}"
 #  if [ "$(ls ${OPENSHIFT_REPO_DIR}deployments)" ]; then
 #    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}deployments/ ${WASND_DEPLOYMENTS_DIR}
 #  fi
-#}
+}
 
 # WAS ND
 function start() {
