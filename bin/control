@@ -8,6 +8,8 @@ WASND_PROFILE_DIR=${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME}
 WASND_BIN_DIR=${WASND_PROFILE_DIR}/bin
 WASND_PID_FILE=${WASND_PROFILE_DIR}/logs/${WASND_SERVER_NAME}/server1.pid
 #WASND_DEPLOYMENTS_DIR=${WASND_PROFILE_DIR}/monitoredDeployableApps/servers/${WASND_SERVER_NAME}
+WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
+WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
 
 cartridge_type="wasnd"
 
@@ -136,9 +138,10 @@ function build() {
 #WAS ND
 function deploy() {
   echo Deploying WAS ND app to ${WASND_DEPLOYMENTS_DIR}
-#  if [ "$(ls ${OPENSHIFT_REPO_DIR}deployments)" ]; then
-#    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}deployments/ ${WASND_DEPLOYMENTS_DIR}
-#  fi
+  #  if [ "$(ls ${OPENSHIFT_REPO_DIR}deployments)" ]; then
+  #    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}deployments/ ${WASND_DEPLOYMENTS_DIR}
+  #  fi
+  ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/installApp.py -connType NONE 
 }
 
 # WAS ND
