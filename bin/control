@@ -231,6 +231,10 @@ function threaddump() {
   fi 
 }
 
+function teardown() {
+  echo "Teardown for $cartridge_type cart"
+}
+
 case "$1" in
   build)           build ;;
   deploy)          deploy ;;
@@ -241,5 +245,6 @@ case "$1" in
   reload)          reload ;;
   tidy)            tidy ;;
   threaddump)      threaddump ;;
+  teardown)	       teardown ;;
   *)               exit 0;
 esac   
