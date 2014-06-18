@@ -21,8 +21,9 @@ for iApp in appsBefore:
     if appToUninstall:
         print "Uninstalling app: ", appToUninstall
         appToUninstall = str(appToUninstall).strip();
-        AdminApp.uninstall(appToUninstall)
+        AdminApp.uninstall(appToUninstall);
         AdminConfig.save();
+        break;
      
 #Install the app
 print "Installing App: ", strAppToInstall
