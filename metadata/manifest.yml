@@ -6,7 +6,7 @@ Version: '8.5'
 Source-Url: https://github.com/jstakun/wasndcart.git
 License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
-Cartridge-Version: '0.0.2'
+Cartridge-Version: '0.0.3'
 Cartridge-Vendor: jstakun
 Categories:
   - web_framework
