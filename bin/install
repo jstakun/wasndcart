@@ -4,6 +4,6 @@
 
 echo WAS ND profile cartridge install started...
 
-#
+# Create and install the initial template WAR
 
 echo WAS ND profile cartridge install finished with status $?
