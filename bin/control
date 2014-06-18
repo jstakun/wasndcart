@@ -141,7 +141,7 @@ function deploy() {
   #  if [ "$(ls ${OPENSHIFT_REPO_DIR}deployments)" ]; then
   #    rsync -r --delete --exclude ".*" ${OPENSHIFT_REPO_DIR}deployments/ ${WASND_DEPLOYMENTS_DIR}
   #  fi
-  ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/installApp.py -connType NONE 
+  ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/installApp.py -host ${OPENSHIFT_WASND_IP}
 }
 
 # WAS ND

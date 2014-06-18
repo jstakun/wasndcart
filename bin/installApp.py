@@ -1,15 +1,15 @@
 # script to install a EAR or WAR in WebSphere Application Server
 #
+import os;
  
 cellName = '127Node01Cell'
 nodeName = '127Node01'
 serverName = 'server1'
- 
-filePath1 = os.environ["OPENSHIFT_REPO_DIR"] + "deployments/ROOT.war"
-contextRoot = "/"
+
+strAppToInstall = "ROOT.war" 
+filePath1 = os.environ["OPENSHIFT_REPO_DIR"] + "deployments/" + strAppToInstall
+contextRoot = ""
      
-#Get the name of the WAR file:
-strAppToInstall = filePath1[filePath1.rfind("/")+1:len(filePath1)];
 print "Installing ", strAppToInstall, " from ", filePath1;
      
 #Uninstall the app if already deployed.
@@ -35,8 +35,7 @@ theApp = ""
 for iApp in apps:
     if str(iApp).find(strAppToInstall) >= 0:
          theApp = iApp;
-
-print "Starting App: ", theApp
-appManager = AdminControl.queryNames('cell='+cellName+',node='+nodeName+',type=ApplicationManager,process='+serverName+',*')
-AdminControl.invoke(appManager, 'startApplication', theApp)
- print "Application installed and started successfuly!"
+         print "Starting App: ", theApp
+         appManager = AdminControl.queryNames('cell='+cellName+',node='+nodeName+',type=ApplicationManager,process='+serverName+',*')
+         AdminControl.invoke(appManager, 'startApplication', theApp)
+         print "Application installed and started successfully"
