@@ -1,7 +1,7 @@
 # script to install a EAR or WAR in WebSphere Application Server
 #
  
-cellName = '127Cell01'
+cellName = '127Node01Cell'
 nodeName = '127Node01'
 serverName = 'server1'
  
