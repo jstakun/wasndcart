@@ -1,19 +1,17 @@
 Name: wasndprofile
 Cartridge-Short-Name: WASND
 Display-Name: Websphere ND Profile
-Description: "Websphere ND Profiles cartridge"
+Description: "Websphere ND Profile cartridge"
 Version: '8.5'
 Source-Url: https://github.com/jstakun/wasndcart.git
 License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
-Vendor: IBM
-Cartridge-Version: '0.0.1'
-Cartridge-Vendor: gmsworld
+Cartridge-Version: '0.0.2'
+Cartridge-Vendor: jstakun
 Categories:
   - web_framework
   - java
   - java_ee_7
-Website: http://www.ibm.com
 Help-Topics:
   "Developer Center": https://www.openshift.com/developers
 Cart-Data:
