@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+
+WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
+WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
+
+${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f dbvars.py -connType NONE
