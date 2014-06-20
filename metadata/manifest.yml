@@ -6,12 +6,14 @@ Version: '8.5'
 Source-Url: https://github.com/jstakun/wasndcart.git
 License: LGPL
 License-Url: http://www.gnu.org/copyleft/lesser.txt
-Cartridge-Version: '0.0.3'
+Cartridge-Version: '0.0.4'
 Cartridge-Vendor: jstakun
 Categories:
+  - service
   - web_framework
   - java
   - java_ee_7
+Website: http://www.ibm.com/software/products/appserv-wasnd  
 Help-Topics:
   "Developer Center": https://www.openshift.com/developers
 Cart-Data:
