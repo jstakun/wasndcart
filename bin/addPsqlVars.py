@@ -23,6 +23,7 @@ def variable(varname, varvalue, vardesc):
 variable('OPENSHIFT_POSTGRESQL_DB_HOST', os.environ["OPENSHIFT_POSTGRESQL_DB_HOST"], 'PostgreSQL host name')
 variable('OPENSHIFT_POSTGRESQL_DB_PORT', os.environ["OPENSHIFT_POSTGRESQL_DB_PORT"], 'PostgreSQL port')
 variable('OPENSHIFT_POSTGRESQL_DB_NAME', os.environ["OPENSHIFT_GEAR_NAME"], 'PostgreSQL database name')
-variable('OPENSHIFT_POSTGRESQL_DB_PASSWORD', os.environ["OPENSHIFT_POSTGRESQL_DB_PASSWORD"], 'PostgreSQL password')
-variable('OPENSHIFT_POSTGRESQL_DB_USERNAME', os.environ["OPENSHIFT_POSTGRESQL_DB_USERNAME"], 'PostgreSQL user name')
+#username and password must be pspecified in data source confiruration
+#variable('OPENSHIFT_POSTGRESQL_DB_PASSWORD', os.environ["OPENSHIFT_POSTGRESQL_DB_PASSWORD"], 'PostgreSQL password')
+#variable('OPENSHIFT_POSTGRESQL_DB_USERNAME', os.environ["OPENSHIFT_POSTGRESQL_DB_USERNAME"], 'PostgreSQL user name')
 
