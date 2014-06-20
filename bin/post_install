@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+
+WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
+WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
+
+# Create and install the initial template WAR
+pushd ${OPENSHIFT_WASND_DIR}/template/src/main/webapp 1> /dev/null
+  jar cvf ${OPENSHIFT_REPO_DIR}deployments/ROOT.war ./*
+popd 1> /dev/null
+${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/installApp.py -host ${OPENSHIFT_WASND_IP}

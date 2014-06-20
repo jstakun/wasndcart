@@ -19,7 +19,7 @@ echo Calling ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profile
 
 ${WASND_INSTALL_ROOT}/bin/manageprofiles.sh -create -debug -profileName ${WASND_PROFILE_NAME} -profilePath ${OPENSHIFT_WASND_DIR}profiles/${WASND_PROFILE_NAME} -hostName ${OPENSHIFT_WASND_IP} -omitAction samplesInstallAndConfig defaultAppDeployAndConfig -defaultPorts
 
-#no using WAS hot deploy since v 0.0.3
+#not used since v0.0.3
 #echo Calling ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${WASND_INSTALL_ROOT}/bin/hotDeploy.py -connType NONE
 #${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/hotDeploy.py -connType NONE
 
