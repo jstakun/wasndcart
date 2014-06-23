@@ -1,16 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>${APP_NAME}</groupId>
-  <artifactId>${APP_NAME}</artifactId>
+  <groupId>wasndapp</groupId>
+  <artifactId>wasndapp</artifactId>
   <version>0.0.1</version>
   <packaging>war</packaging>
-  <name>${APP_NAME}</name>
+  <name>wasndapp</name>
   
   <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <APP_NAME>wasndapp</APP_NAME>
   </properties>
   
   <profiles>
@@ -24,7 +23,7 @@
 			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<build>
-				<finalName>${APP_NAME}</finalName>
+				<finalName>wasndapp</finalName>
 				<plugins>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>
@@ -38,4 +37,12 @@
 			</build>
 		</profile>
 	</profiles>
+	<dependencies>
+  		<dependency>
+  			<groupId>javax.servlet</groupId>
+  			<artifactId>javax.servlet-api</artifactId>
+  			<version>3.0.1</version>
+  			<scope>provided</scope>
+  		</dependency>
+  	</dependencies>
 </project>
