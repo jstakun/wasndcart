@@ -1,9 +1,9 @@
 #!/bin/bash -eu
 
-WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
-WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
+#WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
+#WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
 
-echo WAS ND profile cartridge setup started...
+echo WAS ND profile cartridge setup script started...
 
 echo Checking user id:
 
@@ -27,4 +27,4 @@ echo Calling ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WA
 
 ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/modifyPorts.py -connType NONE
 
-echo WAS ND profile cartridge setup finished with status $?
+echo WAS ND profile cartridge setup script finished with status $?

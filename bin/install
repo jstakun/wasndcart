@@ -1,9 +1,9 @@
 #!/bin/bash -eu
 
-#create profile
+#
 
-echo WAS ND profile cartridge install started...
+echo WAS ND profile cartridge install script started...
 
-# Create and install the initial template WAR
+#
 
-echo WAS ND profile cartridge install finished with status $?
+echo WAS ND profile cartridge install script finished with status $?

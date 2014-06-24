@@ -1,1 +1,7 @@
-echo Tear down in WAS ND cartridge executed
+#!/bin/bash -eu
+
+echo WAS ND profile cartridge teardown script started...
+
+#
+
+echo WAS ND profile cartridge teardown script finished with status $?
