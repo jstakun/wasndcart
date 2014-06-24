@@ -1,8 +1,5 @@
 #!/bin/bash -eu
 
-#WASND_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
-#WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
-
 echo WAS ND profile cartridge post_install script started...
 
 mkdir ${OPENSHIFT_REPO_DIR}deployments/
