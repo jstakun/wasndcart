@@ -65,7 +65,7 @@ Subscribes:
     Type: "NET_TCP:db:postgres"
     Required : false  
   set-db-connection-info:
-    Type: ENV:NET_TCP:db:connection-info
+    Type: "NET_TCP:db:connection-info"
     Required : false
 Scaling:
   Min: 1
@@ -80,8 +80,14 @@ Endpoints:
     Mappings:
     - Frontend: ''
       Backend: ''
-  - Private-IP-Name: IP
-    Private-Port-Name: MANAGEMENT_HTTP_PORT
-    Private-Port: 9060
+  - Private-IP-Name:     IP
+    Private-Port-Name:   MANAGEMENT_HTTP_PORT
+    Private-Port:        9060
+    Public-Port-Name:    HTTP_MANAGEMENT_PORT
+    Protocols:
+    - http
+    Mappings:
+    - Frontend: ''
+      Backend: '/ibm/console'
 Additional-Control-Actions:
     - threaddump
