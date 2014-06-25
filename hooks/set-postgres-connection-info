@@ -1,2 +1,7 @@
 #TODO
 echo PostgreSQL cartridge created. Should create PostgreSQL data source...
+
+echo Setting PostgreSQL environment variables at WAS
+
+echo Calling ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${WASND_INSTALL_ROOT}/bin/addPsqlVars.py -connType NONE
+${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/addPsqlVars.py -connType NONE
