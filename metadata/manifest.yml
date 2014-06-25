@@ -87,7 +87,7 @@ Endpoints:
     Protocols:
     - http
     Mappings:
-    - Frontend: ''
+    - Frontend: '/ibm/console'
       Backend: '/ibm/console'
 Additional-Control-Actions:
     - threaddump
