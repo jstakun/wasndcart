@@ -55,14 +55,17 @@ Publishes:
   publish-http-url:
     Type: "NET_TCP:httpd-proxy-info"
 Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
   set-mysql-connection-info:
-    Type: "ENV:NET_TCP:db:mysql"
+    Type: "NET_TCP:db:mysql"
     Required : false
   set-postgres-connection-info:
-    Type: "ENV:NET_TCP:db:postgres"
+    Type: "NET_TCP:db:postgres"
     Required : false  
   set-db-connection-info:
-    Type: "ENV:NET_TCP:db:connection-info"
+    Type: "NET_TCP:db:connection-info"
     Required : false
 Scaling:
   Min: 1
@@ -85,6 +88,6 @@ Endpoints:
     - http
     Mappings:
     - Frontend: '/ibm/console'
-      Backend: ''
+      Backend: '/ibm/console'
 Additional-Control-Actions:
     - threaddump
