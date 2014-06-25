@@ -26,12 +26,12 @@ function ishttpup() {
     let count=0
     while [ ${count} -lt 64 ]
     do
-        if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} (LISTEN)" > /dev/null; then
-            echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} listening port"
+        if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} (LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} listening port"
             return 0
         fi
         let count=${count}+1
-        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_HTTP_PORT} but keep trying: $count"
+        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} but keep trying: $count"
         
         sleep 2
     done
@@ -44,12 +44,12 @@ function ismgmtup() {
     let count=0
     while [ ${count} -lt 64 ]
     do
-        if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} (LISTEN)" > /dev/null; then
-            echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} listening port"
+        if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} (LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} listening port"
             return 0
         fi
         let count=${count}+1
-        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_MANAGEMENT_HTTP_PORT} but keep trying: $count"
+        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} but keep trying: $count"
 
         sleep 2
     done
