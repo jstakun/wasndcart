@@ -4,6 +4,10 @@
 
 echo WAS ND profile cartridge install script started...
 
-#
+echo Creating initial template WAR
+mkdir ${OPENSHIFT_REPO_DIR}deployments/
+pushd ${OPENSHIFT_WASND_DIR}/template/src/main/webapp 1> /dev/null
+  jar cvf ${OPENSHIFT_REPO_DIR}deployments/ROOT.war ./*
+popd 1> /dev/null
 
 echo WAS ND profile cartridge install script finished with status $?
