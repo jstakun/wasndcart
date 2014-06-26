@@ -148,6 +148,8 @@ function start() {
      if ! ishttpup; then
         echo "Timed out waiting for http listening port"
         exit 1
+     else
+        ${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f ${OPENSHIFT_WASND_DIR}bin/startApp.py -host ${OPENSHIFT_WASND_IP}
      fi
   fi
   

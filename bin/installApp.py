@@ -5,8 +5,8 @@ import os;
 cellName = '127Node01Cell'
 nodeName = '127Node01'
 serverName = 'server1'
-
-strAppToInstall = "ROOT.war" 
+strAppToInstall = "ROOT.war"
+ 
 filePath1 = os.environ["OPENSHIFT_REPO_DIR"] + "deployments/" + strAppToInstall
 contextRoot = ""
      
@@ -29,15 +29,5 @@ if appToUninstall:
 print "Installing App: ", strAppToInstall
 AdminApp.install(filePath1, "-usedefaultbindings");   
 #AdminApp.install(filePath1, "-contextroot /"+contextRoot+" -defaultbinding.virtual.host default_host -usedefaultbindings");   
-AdminConfig.save();   
-     
-#Start the app   
-apps = AdminApp.list().split("\n");   
-theApp = ""   
-for iApp in apps:
-    if str(iApp).find(strAppToInstall) >= 0:
-         theApp = iApp;
-         print "Starting App: ", theApp
-         appManager = AdminControl.queryNames('cell='+cellName+',node='+nodeName+',type=ApplicationManager,process='+serverName+',*')
-         AdminControl.invoke(appManager, 'startApplication', theApp)
-         print "Application installed and started successfully"
+print "Application installed successfully"
+AdminConfig.save();
