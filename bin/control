@@ -147,7 +147,7 @@ function start() {
       echo "Application is already running"
   else    
     
-     ${WASND_PROFILE_DIR}/bin/startServer.sh ${WASND_SERVER_NAME} 
+     ${WASND_PROFILE_DIR}/bin/startServer.sh ${WASND_SERVER_NAME} -trace
      
      if ! ishttpup; then
         echo "Timed out waiting for http listening port"
@@ -165,8 +165,8 @@ function stop() {
   echo "Stopping $cartridge_type cart"
 
   if ishttpup; then
-    echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} -connType NONE
-   	${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} -connType NONE
+    echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} -connType NONE -trace -timeout 180
+   	${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME} -connType NONE -trace -timeout 180
   elif isrunning; then
     if [ -f "$WASND_PID_FILE" ]; then
       	pid = $(cat $WASND_PID_FILE);
