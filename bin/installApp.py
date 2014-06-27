@@ -27,7 +27,7 @@ if appToUninstall:
      
 #Install the app
 print "Installing App: ", strAppToInstall
-AdminApp.install(filePath1, "-usedefaultbindings");   
+AdminApp.install(filePath1, "-appname " + strAppToInstall +  " -usedefaultbindings");   
 #AdminApp.install(filePath1, "-contextroot /"+contextRoot+" -defaultbinding.virtual.host default_host -usedefaultbindings");   
 print "Application installed successfully"
 AdminConfig.save();
