@@ -1,4 +1,5 @@
 #Start the app   
+import sys
 
 cellName = '127Node01Cell'
 nodeName = '127Node01'
@@ -11,6 +12,9 @@ for iApp in apps:
     if str(iApp).find(strAppToInstall) >= 0:
          theApp = iApp;
          print "Starting App: ", theApp
-         appManager = AdminControl.queryNames('cell='+cellName+',node='+nodeName+',type=ApplicationManager,process='+serverName+',*')
-         AdminControl.invoke(appManager, 'startApplication', theApp)
-         print "Application started successfully"
+         try:
+         	appManager = AdminControl.queryNames('cell='+cellName+',node='+nodeName+',type=ApplicationManager,process='+serverName+',*')
+         	AdminControl.invoke(appManager, 'startApplication', theApp)
+         	print "Application started successfully"
+         except: 
+            print("Application might be running: %s" % sys.exc_info())
