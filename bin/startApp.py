@@ -17,4 +17,4 @@ for iApp in apps:
          	AdminControl.invoke(appManager, 'startApplication', theApp)
          	print "Application started successfully"
          except: 
-            print("Application might be running: %s" % sys.exc_info())
+            print "Application might be running: ", sys.exc_info()
