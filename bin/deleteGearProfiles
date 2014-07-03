@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 #use this script to delete WAS ND profiles which are not linked with existing os user (gear) 
+#copy this script to WAS_INSTALL_ROOT/bin and schedule it to run using cron
 
 WAS_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
 
