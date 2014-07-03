@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+#use this script to delete WAS ND profiles which are not linked with existing os user (gear) 
+
+WAS_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer
+
+function deleteGearProfiles() {
+
+	count=0
+
+	for p in `${WAS_INSTALL_ROOT}/bin/manageprofiles.sh -listProfiles | sed 's/[^0-9a-z]/ /g'` ;do
+   		echo Checking if profile $p is linked with existing gear
+   		grep -q ^profilers:.*$p /etc/group || $WAS_INSTALL_ROOT/bin/manageprofiles.sh -delete -profileName $p
+   		count=$(($count+1))
+	done
+
+	echo Checked $count profiles
+}
+
+echo deleteProfiles script started...
+
+deleteGearProfiles
+
+echo deleteProfiles script finished with status $?
