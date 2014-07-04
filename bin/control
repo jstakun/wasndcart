@@ -186,7 +186,7 @@ function stop() {
   if isrunning; then
   	 if issoapup; then
     	echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
-   		${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
+   		${WASND_PROFILE_DIR}/bin/stopServer.sh -conntype RMI ${WASND_SERVER_NAME}
   	 elif [ -f "$WASND_PID_FILE" ]; then
     	pid = $(cat $WASND_PID_FILE);
         echo "Sending SIGTERM to wasnd:$pid ..." 1>&2
