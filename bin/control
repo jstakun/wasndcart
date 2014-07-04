@@ -24,7 +24,7 @@ function isrunning() {
 # WAS ND Check if the server http port is up
 function ishttpup() {
     let count=0
-    while [ ${count} -lt 64 ]
+    while [ ${count} -lt 16 ]
     do
         if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} listening port"
@@ -42,7 +42,7 @@ function ishttpup() {
 # WAS ND Check if the server mgmt port is up
 function ismgmtup() {
     let count=0
-    while [ ${count} -lt 64 ]
+    while [ ${count} -lt 16 ]
     do
         if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} listening port"
@@ -164,7 +164,7 @@ function start() {
 function stop() {
   echo "Stopping $cartridge_type cart"
 
-  if ishttpup; then
+  if ismgmtup; then
     	echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
    		${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
   elif isrunning; then
