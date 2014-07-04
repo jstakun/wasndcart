@@ -251,7 +251,7 @@ killtree() {
     fi
 
     local count=0
-    while [ ${count} -lt 15 ]
+    while [ ${count} -lt $retry_count ]
     do
         local should_be_gone_pid=$(ps -o pid -p ${_pid} --no-headers)
         if [ -z "$should_be_gone_pid" ]; then
