@@ -166,10 +166,11 @@ function stop() {
   echo "Stopping $cartridge_type cart"
 
   if isrunning; then
-  	 if ishttpup; then
-     	echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
-   	 	${WASND_PROFILE_DIR}/bin/stopServer.sh  ${WASND_SERVER_NAME} -conntype NONE
-  	 elif [ -f "$WASND_PID_FILE" ]; then
+     #this hangs for 5mins during node shutdown 
+  	 #if ishttpup; then
+     #	echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
+   	 #	${WASND_PROFILE_DIR}/bin/stopServer.sh  ${WASND_SERVER_NAME}
+  	 if [ -f "$WASND_PID_FILE" ]; then
     	pid=$(cat $WASND_PID_FILE);
         echo "Sending SIGTERM to wasnd:$pid ..." 1>&2
         killtree $pid
