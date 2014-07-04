@@ -58,24 +58,6 @@ function ismgmtup() {
     return 1
 }
 
-# WAS ND Check if the server soap port is up
-function issoapup() {
-    let count=0
-    while [ ${count} -lt ${retry_count} ]
-    do
-        if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:8880 (LISTEN)" > /dev/null; then
-            echo "Found ${OPENSHIFT_WASND_IP}:8880 listening port"
-            return 0
-        fi
-        let count=${count}+1
-        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:8880 but keep trying: $count"
-
-        sleep 2
-    done
-
-    return 1
-}
-
 # TODO build
 function build() {
  
@@ -184,7 +166,7 @@ function stop() {
   echo "Stopping $cartridge_type cart"
 
   if isrunning; then
-  	 #if issoapup; then
+  	 #if ishttpup; then
      #	echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
    	 #	${WASND_PROFILE_DIR}/bin/stopServer.sh  ${WASND_SERVER_NAME} -conntype RMI -port 2809
   	 if [ -f "$WASND_PID_FILE" ]; then
