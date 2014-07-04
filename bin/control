@@ -3,6 +3,7 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 cartridge_type="wasnd"
+retry_count=16
 
 # WAS ND check if the was nd process is running
 function isrunning() {
@@ -24,7 +25,7 @@ function isrunning() {
 # WAS ND Check if the server http port is up
 function ishttpup() {
     let count=0
-    while [ ${count} -lt 16 ]
+    while [ ${count} -lt ${retry_count} ]
     do
         if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_WEB_PORT} listening port"
@@ -42,7 +43,7 @@ function ishttpup() {
 # WAS ND Check if the server mgmt port is up
 function ismgmtup() {
     let count=0
-    while [ ${count} -lt 16 ]
+    while [ ${count} -lt ${retry_count} ]
     do
         if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} (LISTEN)" > /dev/null; then
             echo "Found ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} listening port"
@@ -50,6 +51,24 @@ function ismgmtup() {
         fi
         let count=${count}+1
         echo "Failed to connect to ${OPENSHIFT_WASND_IP}:${OPENSHIFT_WASND_ADMIN_PORT} but keep trying: $count"
+
+        sleep 2
+    done
+
+    return 1
+}
+
+# WAS ND Check if the server soap port is up
+function issoapup() {
+    let count=0
+    while [ ${count} -lt ${retry_count} ]
+    do
+        if /usr/sbin/lsof -P -n -i | grep "${OPENSHIFT_WASND_IP}:8880 (LISTEN)" > /dev/null; then
+            echo "Found ${OPENSHIFT_WASND_IP}:8880 listening port"
+            return 0
+        fi
+        let count=${count}+1
+        echo "Failed to connect to ${OPENSHIFT_WASND_IP}:8880 but keep trying: $count"
 
         sleep 2
     done
@@ -165,7 +184,7 @@ function stop() {
   echo "Stopping $cartridge_type cart"
 
   if isrunning; then
-  	 if ismgmtup; then
+  	 if issoapup; then
     	echo Calling ${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
    		${WASND_PROFILE_DIR}/bin/stopServer.sh ${WASND_SERVER_NAME}
   	 elif [ -f "$WASND_PID_FILE" ]; then
