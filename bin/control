@@ -3,7 +3,7 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 cartridge_type="wasnd"
-retry_count=16
+retry_count=32
 
 # WAS ND check if the was nd process is running
 function isrunning() {
