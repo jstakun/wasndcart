@@ -2,4 +2,4 @@
 
 WASND_PROFILE_NAME=${OPENSHIFT_GEAR_UUID}
 
-${WAS_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f dbvars.py -connType NONE
+${WASND_INSTALL_ROOT}/bin/wsadmin.sh -lang jython -profileName ${WASND_PROFILE_NAME} -f dbvars.py -connType NONE
