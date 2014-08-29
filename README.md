@@ -20,9 +20,11 @@ Installation steps:
 
 4. Modify SELinux policies to grant WAS_INSTALL_ROOT rw privileges to profilers or simply setenforce 0
 
-	If you want to this privileges might be limited to number of WAS_INSTALL_ROOT sub directories.
+   If you want to this privileges might be limited to number of WAS_INSTALL_ROOT sub directories.
 
 5. Set env variable WAS_INSTALL_ROOT
+
+   I.e. add WAS_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer at the end of /etc/profile 
 
 6. Download and install cartridge:
 
