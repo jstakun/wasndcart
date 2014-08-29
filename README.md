@@ -22,9 +22,9 @@ Installation steps:
 
    If you want to this privileges might be limited to number of WAS_INSTALL_ROOT sub directories.
 
-5. Set env variable WAS_INSTALL_ROOT
+5. Set Openshift env variable WASND_INSTALL_ROOT
 
-   I.e. add WAS_INSTALL_ROOT=/opt/IBM/WebSphere/AppServer at the end of /etc/profile 
+   echo $WAS_INSTALL_ROOT > /etc/openshift/env/WASND_INSTALL_ROOT
 
 6. Download and install cartridge:
 
